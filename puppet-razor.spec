@@ -1,7 +1,7 @@
 Summary:	Next-Generation Provisioning for bare metal and virtual servers
 Name:		puppet-razor
 Version:	0.9.0
-Release:	0.1
+Release:	0.2
 License:	Apache v2.0
 Group:		Applications
 Source0:	https://github.com/puppetlabs/Razor/archive/%{version}.tar.gz?/%{name}-%{version}.tgz
@@ -9,6 +9,7 @@ Source0:	https://github.com/puppetlabs/Razor/archive/%{version}.tar.gz?/%{name}-
 URL:		https://github.com/puppetlabs/Razor/wiki
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.656
+BuildRequires:	sed >= 4.0
 Requires:	ruby-base62
 Requires:	ruby-bson
 Requires:	ruby-bson_ext
@@ -44,6 +45,7 @@ taking possession of ESX systems).
 
 %prep
 %setup -q -n Razor-%{version}
+%{__sed} -i -e '1 s,#!.*ruby,#!%{__ruby},' bin/*
 
 %build
 
